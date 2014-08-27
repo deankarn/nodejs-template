@@ -18,7 +18,8 @@
     "passport-twitter" : "latest", 	
     "passport-google-oauth" : "latest",
     "connect-flash" : "latest", 
-    "bcrypt-nodejs" : "latest" 
+    "bcrypt-nodejs" : "latest" ,
+    "globalize" : "latest"
   },
     "devDependencies" : {
     "morgan": "latest"
