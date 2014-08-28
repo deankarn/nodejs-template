@@ -1,6 +1,7 @@
 
 // Setup required tools and variables
 
+var Globalize     = require('globalize');
 var express       = require('express');
 var session       = require('express-session');
 var MongoStore    = require('connect-mongo')(session);
@@ -16,6 +17,47 @@ var fs            = require('fs');
 var app           = express();
 var port          = process.env.PORT || 8081;
 var configDB      = require(__dirname + '/app/config/database.js');
+
+
+
+// Before we can use Globalize, we need to feed it on the appropriate I18n content (Unicode CLDR). Read Requirements on Getting Started on the root's README.md for more information.
+Globalize.load(require( __dirname + '/cldr/main/en-CA/ca-gregorian.json'));
+Globalize.load(require( __dirname + '/cldr/main/en-CA/numbers.json'));
+Globalize.load(require( __dirname + '/cldr/main/en-US/ca-gregorian.json'));
+Globalize.load(require( __dirname + '/cldr/main/en-US/numbers.json'));
+Globalize.load(require( __dirname + '/cldr/main/fr-CA/ca-gregorian.json'));
+Globalize.load(require( __dirname + '/cldr/main/fr-CA/numbers.json'));
+Globalize.load(require( __dirname + '/cldr/main/en/ca-gregorian.json'));
+Globalize.load(require( __dirname + '/cldr/main/en/numbers.json'));
+Globalize.load(require( __dirname + '/cldr/supplemental/likelySubtags.json'));
+Globalize.load(require( __dirname + '/cldr/supplemental/timeData.json'));
+Globalize.load(require( __dirname + '/cldr/supplemental/weekData.json'));
+
+// Load all routes in the /app/routes/ directory
+
+// Globalize.loadTranslations(require( __dirname + '/app/translations/profile.json'));
+fs.readdir(__dirname + '/app/translations', function (err, files){
+  files.forEach(function (fn) {
+    if(!/\.json$/.test(fn)) return;
+      Globalize.loadTranslations(require( __dirname + '/app/translations/' + fn));
+  });
+});
+
+// Set "en" as our default locale.
+Globalize.locale( 'en' );
+// var locale        = require(__dirname + '/app/middleware/locale.js')(Globalize);
+// will put in separate config later
+function locale_middleware(req, res, next){
+
+  if(!req.session.locale)
+  {
+    req.session.locale = 'en';
+  }
+
+   req.locale = Globalize(req.session.locale);
+
+   next(); // go to routes
+};
 
 // Configure and setup tools and their settings
 
@@ -49,6 +91,9 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
+
+app.use(locale_middleware);
+
 app.use(flash()); // use connect-flash for flash messages stored in session
 
 app.use(connectAssets({

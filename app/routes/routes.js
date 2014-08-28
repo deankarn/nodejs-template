@@ -31,8 +31,12 @@ module.exports = function(app, passport) {
         }));
 
         app.get('/profile', isLoggedIn, function(req, res) {
+
+            console.log( req.locale.formatDate( new Date(), { datetime: "short" } ) );
+            // req.locale.formatDate( new Date(), { datetime: "short" } );
+
               res.render('main/profile.jade', {
-		              title: 'Profile',
+		              title: req.locale.translate('profile/title'),
                       user : req.user // get the user out of session and pass to template
               });
         });
