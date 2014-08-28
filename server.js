@@ -18,8 +18,6 @@ var app           = express();
 var port          = process.env.PORT || 8081;
 var configDB      = require(__dirname + '/app/config/database.js');
 
-
-
 // Before we can use Globalize, we need to feed it on the appropriate I18n content (Unicode CLDR). Read Requirements on Getting Started on the root's README.md for more information.
 Globalize.load(require( __dirname + '/cldr/main/en-CA/ca-gregorian.json'));
 Globalize.load(require( __dirname + '/cldr/main/en-CA/numbers.json'));
@@ -33,7 +31,7 @@ Globalize.load(require( __dirname + '/cldr/supplemental/likelySubtags.json'));
 Globalize.load(require( __dirname + '/cldr/supplemental/timeData.json'));
 Globalize.load(require( __dirname + '/cldr/supplemental/weekData.json'));
 
-// Load all routes in the /app/routes/ directory
+// Load all translations in the /app/translations/ directory
 
 // Globalize.loadTranslations(require( __dirname + '/app/translations/profile.json'));
 fs.readdir(__dirname + '/app/translations', function (err, files){
@@ -45,19 +43,9 @@ fs.readdir(__dirname + '/app/translations', function (err, files){
 
 // Set "en" as our default locale.
 Globalize.locale( 'en' );
-// var locale        = require(__dirname + '/app/middleware/locale.js')(Globalize);
+
+var localeMidgard = require(__dirname + '/app/middleware/locale.js')(Globalize);
 // will put in separate config later
-function locale_middleware(req, res, next){
-
-  if(!req.session.locale)
-  {
-    req.session.locale = 'en';
-  }
-
-   req.locale = Globalize(req.session.locale);
-
-   next(); // go to routes
-};
 
 // Configure and setup tools and their settings
 
@@ -88,14 +76,10 @@ app.use(session({
       clear_interval: 60 * 60 * 1000 // disabled, gets cleaned up 
     })
   }));
-
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-
-app.use(locale_middleware);
-
+app.use(localeMidgard);
 app.use(flash()); // use connect-flash for flash messages stored in session
-
 app.use(connectAssets({
     paths:[
         'static/js',
