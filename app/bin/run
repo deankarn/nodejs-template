@@ -4,4 +4,4 @@ DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "Script NodeJS from $DIR"
 
-NODE_ENV=production nodejs $DIR/../../server.js
+NODE_ENV=production node $DIR/../../server.js
