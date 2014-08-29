@@ -1,0 +1,24 @@
+#!/bin/bash
+
+DIR="$(cd "$(dirname "$0")" && pwd)"
+
+echo "Cleaning directories..."
+
+echo "Cleaning CLDR data.."
+cd $DIR/../../cldr/
+shopt -s extglob
+rm -rf !(.gitignore)
+cd -
+
+echo "Cleaning node_modules directory.."
+rm -rf $DIR/../../node_modules/*
+
+echo "Download & Extracting CLDR Data.."
+cd $DIR/../../cldr/
+wget http://www.unicode.org/Public/cldr/latest/json_full.zip
+unzip json_full.zip
+cd -
+
+echo "Running npm install in developement mode"
+cd $DIR/../../
+NODE_ENV=development npm install --dev
