@@ -17,8 +17,11 @@ echo "Download & Extracting CLDR Data.."
 cd $DIR/../../cldr/
 wget http://www.unicode.org/Public/cldr/latest/json_full.zip
 unzip json_full.zip
+rm json_full.zip
 cd -
 
 echo "Running npm install in developement mode"
 cd $DIR/../../
-NODE_ENV=development npm install --dev
+npm install
+
+exit 0
