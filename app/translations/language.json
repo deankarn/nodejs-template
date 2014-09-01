@@ -1,0 +1,37 @@
+{
+	"en":{
+		"language":{
+			"title": "Language",
+			"selectLangMsg": "Select Language",
+			"setLangMsg": "Set Language"
+		}
+	},
+	"en-CA":{
+		"language":{
+			"title": "Language",
+			"selectLangMsg": "Select Language",
+			"setLangMsg": "Set Language"
+		}
+	},
+	"en-US":{
+		"language":{
+			"title": "Language",
+			"selectLangMsg": "Select Language",
+			"setLangMsg": "Set Language"
+		}
+	},
+	"en-GB":{
+		"language":{
+			"title": "Language",
+			"selectLangMsg": "Select Language",
+			"setLangMsg": "Set Language"
+		}
+	},
+	"fr-CA":{
+		"language":{
+			"title": "langue",
+			"selectLangMsg": "Sélectionnez la langue",
+			"setLangMsg": "Définir la langue"
+		}
+	}
+}

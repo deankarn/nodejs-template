@@ -78,7 +78,7 @@ app.use(session({
   }));
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
-app.use(localeMidgard);
+
 app.use(flash()); // use connect-flash for flash messages stored in session
 app.use(connectAssets({
     paths:[
@@ -88,6 +88,8 @@ app.use(connectAssets({
     servePath: 'static/bundled',
     buildDir: 'static/bundled',
 }));
+
+app.use(localeMidgard);
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');

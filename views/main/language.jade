@@ -1,0 +1,15 @@
+extends /layouts/_layout
+
+block content
+	h1= title
+
+	form#form-lang(action='/language', method='post')
+		label= selectLangMsg
+		select#select-lang(size=5)
+			option(value='en-CA') English Canada
+			option(value='en-US') English US
+			option(value='fr-CA') French Canada
+		button#submit-lang(type='submit')= setLangMsg
+
+block additional-js
+	!= js('app.language_view')
