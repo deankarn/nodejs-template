@@ -1,0 +1,30 @@
+{
+	"en":{
+		"login":{
+			"title": "Login",
+			"email": "Email",
+			"password": "Password"
+		}
+	},
+	"en-GB":{
+		"login":{
+			"title": "Login",
+			"email": "Email",
+			"password": "Password"
+		}
+	},
+	"fr":{
+		"login":{
+			"title": "Connexion",
+			"email": "Email",
+			"password": "mot de passe"
+		}
+	},
+	"zh-Hans-CN":{
+		"login":{
+			"title": "登录",
+			"email": "电子邮件",
+			"password": "密码"
+		}
+	}
+}

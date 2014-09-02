@@ -11,10 +11,7 @@ App.languageView = (function (parent, window, document, $)
     function initialize()
     {
         document.getElementById('submit-lang').onclick = submitOverride;
-
-        //set currently selected language via url parameter before subscribing to onchange
-
-        document.getElementById('select-lang').onchange = languageChanged;
+        select.onchange = languageChanged;
 
         initialized = true;
     }
@@ -29,11 +26,8 @@ App.languageView = (function (parent, window, document, $)
     {
         e.preventDefault();
 
-        var form = document.getElementById('form-lang');
-        var select = document.getElementById('select-lang');
-
-        // var lang = select.selectedIndex == -1 ? <get lang from url param> : select.options[select.selectedIndex];
-        var lang = select.options[select.selectedIndex].value;
+        var form = document.getElementById('form-lang'),
+            lang = select.options[select.selectedIndex].value;
 
         form.action = form.action + '?locale=' + lang;
 
@@ -44,6 +38,7 @@ App.languageView = (function (parent, window, document, $)
         debug = val;
     }
 
+    var select = document.getElementById('select-lang');
     var initialized = false;
     var debug = false;
 

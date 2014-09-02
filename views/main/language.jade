@@ -6,9 +6,12 @@ block content
 	form#form-lang(action='/language', method='post')
 		label= selectLangMsg
 		select#select-lang(size=5)
-			option(value='en-CA') English Canada
-			option(value='en-US') English US
-			option(value='fr-CA') French Canada
+			each lang in languages
+				if lang.value == localeString
+					option(value=lang.value,selected='selected') #{lang.text}
+				else
+					option(value=lang.value) #{lang.text}
+			
 		button#submit-lang(type='submit')= setLangMsg
 
 block additional-js

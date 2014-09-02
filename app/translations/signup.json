@@ -1,0 +1,22 @@
+{
+	"en":{
+		"signup":{
+			"title": "Sign Up"
+		}
+	},
+	"en-GB":{
+		"signup":{
+			"title": "Sign Up"
+		}
+	},
+	"fr":{
+		"signup":{
+			"title": "Signer"
+		}
+	},
+	"zh-Hans-CN":{
+		"signup":{
+			"title": "报名"
+		}
+	}
+}

@@ -6,11 +6,20 @@ module.exports = function(app, passport) {
     });
 
     app.get('/language', function(req, res) {
+
             // render the page and pass in any flash data if it exists
             res.render('main/language.jade', { 
                 title : req.locale.translate('language/title'), 
                 selectLangMsg : req.locale.translate('language/selectLangMsg') ,
-                setLangMsg : req.locale.translate('language/setLangMsg')
+                setLangMsg : req.locale.translate('language/setLangMsg'),
+                localeString : req.localeString,
+                languages : [
+                    {'text':'English (UK)', 'value':'en-GB'},
+                    {'text':'English (US)', 'value':'en-US'},
+                    {'text':'Français (Canada)', 'value':'fr-CA'},
+                    {'text':'Français (France)', 'value':'fr-FR'},
+                    {'text':'中国 (简体)', 'value':'zh-Hans-CN'}
+                ]
             }); 
     });
 
@@ -32,7 +41,12 @@ module.exports = function(app, passport) {
 
     app.get('/login', function(req, res) {
             // render the page and pass in any flash data if it exists
-            res.render('main/login.jade', { title: 'Login', message: req.flash('loginMessage') }); 
+            res.render('main/login.jade', { 
+                title: req.locale.translate('login/title'), 
+                email: req.locale.translate('login/email'), 
+                password: req.locale.translate('login/password'), 
+                message: req.flash('loginMessage')
+            }); 
     });
 
     // process the login form
@@ -45,7 +59,12 @@ module.exports = function(app, passport) {
     app.get('/signup', function(req, res) {
 
             // render the page and pass in any flash data if it exists
-            res.render('main/signup.jade', { title: 'Signup', message: req.flash('signupMessage') });
+            res.render('main/signup.jade', { 
+                title: req.locale.translate('login/title'), 
+                email: req.locale.translate('login/email'), 
+                password: req.locale.translate('login/password'), 
+                message: req.flash('signupMessage') 
+            });
     });
 
     // process the signup form
@@ -57,7 +76,7 @@ module.exports = function(app, passport) {
 
     app.get('/profile', isLoggedIn, function(req, res) {
 
-        console.log( req.locale.formatDate( new Date(), { datetime: "short" } ) );
+        //console.log( req.locale.formatDate( new Date(), { datetime: "short" } ) );
         // req.locale.formatDate( new Date(), { datetime: "short" } );
 
           res.render('main/profile.jade', {

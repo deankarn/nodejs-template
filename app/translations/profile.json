@@ -4,24 +4,19 @@
 			"title": "Profile"
 		}
 	},
-	"en-CA":{
-		"profile":{
-			"title": "Profile"
-		}
-	},
-	"en-US":{
-		"profile":{
-			"title": "Profile"
-		}
-	},
 	"en-GB":{
 		"profile":{
 			"title": "Profile"
 		}
 	},
-	"fr-CA":{
+	"fr":{
 		"profile":{
 			"title": "Profil"
+		}
+	},
+	"zh-Hans-CN":{
+		"profile":{
+			"title": "简介"
 		}
 	}
 }
