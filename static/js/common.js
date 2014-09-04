@@ -59,6 +59,6 @@ var Common = window.Common || (function(window, document, $)
 
     return self;
 
-})(window, document, , typeof(jQuery) == 'undefined' ? {} : jQuery);
+})(window, document, typeof(jQuery) == 'undefined' ? {} : jQuery);
 
 Common.initialize();

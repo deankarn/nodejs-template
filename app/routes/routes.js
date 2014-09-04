@@ -59,6 +59,7 @@ module.exports = function(app, passport) {
 
         //set utc offset time on session
         req.session.localeString = req.user.locale;
+        req.session.utcOffset = req.body['utc-offset'];
 
         res.redirect('/profile');
     });
@@ -82,6 +83,7 @@ module.exports = function(app, passport) {
     }), function(req, res){
 
         req.session.localeString = req.user.locale;
+        req.session.utcOffset = req.body['utc-offset'];
 
         res.redirect('/login');
     }
