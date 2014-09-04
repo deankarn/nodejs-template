@@ -64,11 +64,15 @@ module.exports = function(passport) {
                 // set the user's local credentials
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password);
+                newUser.locale         = req.localeString;
 
                 // save the user
                 newUser.save(function(err) {
                     if (err)
                         throw err;
+
+                    //req.session.localeString = user.localeString;
+
                     return done(null, newUser);
                 });
             }
@@ -109,7 +113,8 @@ module.exports = function(passport) {
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
 
             // all is well, return successful user
-            req.session.localeString = 'en-GB'; // will be saved on user profile
+            // req.session.localeString = 'en-GB'; // will be saved on user profile
+            req.session.localeString = user.localeString; // will be saved on user profile
             
             return done(null, user);
         });

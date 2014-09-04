@@ -60,24 +60,27 @@ module.exports = function(app, passport) {
 
             // render the page and pass in any flash data if it exists
             res.render('main/signup.jade', { 
-                title: req.locale.translate('login/title'), 
-                email: req.locale.translate('login/email'), 
-                password: req.locale.translate('login/password'), 
+                title: req.locale.translate('signup/title'), 
+                email: req.locale.translate('signup/email'), 
+                password: req.locale.translate('signup/password'), 
                 message: req.flash('signupMessage') 
             });
     });
 
     // process the signup form
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect : '/profile', // redirect to the secure homepage
+        // successRedirect : '/login', // redirect to the secure homepage
         failureRedirect : '/signup', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
-    }));
+    }), function(req, res){
+
+        req.session.localeString = req.user.locale;
+
+        res.redirect('/login');
+    }
+    );
 
     app.get('/profile', isLoggedIn, function(req, res) {
-
-        //console.log( req.locale.formatDate( new Date(), { datetime: "short" } ) );
-        // req.locale.formatDate( new Date(), { datetime: "short" } );
 
           res.render('main/profile.jade', {
 	              title: req.locale.translate('profile/title'),
