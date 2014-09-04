@@ -37,7 +37,7 @@ module.exports = function(app, passport) {
         {
             res.redirect('/login');
         }
-    })
+    });
 
     app.get('/login', function(req, res) {
             // render the page and pass in any flash data if it exists
@@ -51,10 +51,17 @@ module.exports = function(app, passport) {
 
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
-        successRedirect : '/profile', // redirect to the secure homepage
+        // successRedirect : '/profile', // redirect to the secure homepage
         failureRedirect : '/login', // redirect back to the signup page if there is an error
         failureFlash : true // allow flash messages
-    }));
+    }),
+    function(req, res){
+
+        //set utc offset time on session
+        req.session.localeString = req.user.locale;
+
+        res.redirect('/profile');
+    });
 
     app.get('/signup', function(req, res) {
 

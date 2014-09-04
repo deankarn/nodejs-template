@@ -4,6 +4,7 @@ block content
   h1= title
   
   form(action='/signup', method='post')
+    input#utc-offset(type='hidden', name='utc-offset')
     label= email
     input(type='text', name='email')
     label= password
