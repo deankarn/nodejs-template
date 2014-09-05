@@ -9,6 +9,8 @@ App.test_view = (function (parent, window, document, $)
             e.preventDefault();
             loadPartialView();
         }
+
+        $('.ui.dropdown').dropdown();
     }
 
     function loadPartialView()
@@ -36,12 +38,10 @@ App.test_view = (function (parent, window, document, $)
                     var results = this.responseText;
 
                     var div = document.getElementById('partial-content');
-                    div.innerHTML = results;
-                    // alert(results);
 
-                    // ul.innerHTML = results;
-
-                    //xhr = null;
+                    $(div).html(results);
+                    // div.innerHTML = results;
+                    // eval(div);
                 }
             }
         }, false);
