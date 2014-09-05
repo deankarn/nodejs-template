@@ -1,0 +1,12 @@
+extends /layouts/_layout
+
+block content
+	h1= title
+	br
+	button#load-partials(type='button') Load Partial View
+	br
+	div#partial-content
+
+
+block additional-js
+	!= js('app.test_view')

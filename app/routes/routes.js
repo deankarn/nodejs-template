@@ -104,6 +104,14 @@ module.exports = function(app, passport) {
             req.logout();
             res.redirect('/login');
     });
+
+    // remote test later
+    app.get('/test', function(req, res) {
+
+          res.render('main/test.jade', {
+                  title: req.locale.translate('test/title')
+          });
+    });
 };
 
 // route middleware to make sure a user is logged in
