@@ -1,1 +1,15 @@
-/***/
+.table
+{
+	display:table;
+}
+
+.block
+{
+	display:block;
+}
+
+.block.centered,
+.table.centered
+{
+	margin:0 auto;
+}

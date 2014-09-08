@@ -1,17 +1,40 @@
 extends /layouts/_layout
 
+block additional-css
+	!= css('app.login_view')
+
 block content
-	h1= title
-
-	form(action='/login', method='post')
-		input#utc-offset(type='hidden', name='utc-offset')
-		label= email
-		input(type='text', name='email')
-		label= password
-		input(type='password', name='password')
-		button(type='submit') #{title}
-
-	a(href='/language') Select Language
+	form#login-form.block.centered.ui.form.raised.segment(action='/login', method='post')
+		input(type='hidden', name='_csrf', value=token)
+		h1.ui.center.aligned.header #{title}
+		image#avatar.block.centered.circular.ui.image(src='/static/images/avatar.jpg', align='middle')
+		div.field
+			input#utc-offset(type='hidden', name='utc-offset')
+		div.field
+			label= email
+			div.ui.left.labeled.icon.input
+				input(type='text', name='email', palceholder='Email')
+				i.user.icon
+				div.ui.corner.label
+					i.icon.asterisk
+		div.field
+			label= password
+			div.ui.left.labeled.icon.input
+				input(type='password', name='password', paceholder='Password')
+				i.lock.icon
+				div.ui.corner.label
+					i.icon.asterisk
+		div.fluid.ui.blue.submit.button #{title}
+		div.ui.clearing.divider
+		div.ui.two.fields
+			div.field
+				a.ui.basic.button(href='/password-recovery') Forgot Password
+					//i.icon.refresh
+					//span Forgot Password
+			div.field
+				a.ui.basic.button(href='/language') Select Language
+					//i.icon.globe
+					//span Language
 
 block additional-js
 	!= js('app.login_view')

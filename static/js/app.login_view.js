@@ -2,7 +2,33 @@ App.login_view = (function (parent, window, document, $)
 {
     function initialize()
     {
-        setUtcOffsetTime()
+        setUtcOffsetTime();
+
+        var rules = {
+            email: {
+              identifier  : 'email',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your Email'
+                }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your Password'
+                }
+              ]
+            }
+        };
+
+        $('.ui.form').form(rules, {
+            inline : true,
+            on     : 'submit'
+          });
     }
 
     function setUtcOffsetTime()

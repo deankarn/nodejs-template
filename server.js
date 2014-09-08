@@ -7,6 +7,7 @@ var session       = require('express-session');
 var MongoStore    = require('connect-mongo')(session);
 var bodyParser    = require('body-parser');
 var cookieParser  = require('cookie-parser');
+var csrf          = require('csurf');
 var mongoose 	    = require('mongoose');
 var passport 	    = require('passport');
 var flash    	    = require('connect-flash'); // may get rid of if we go 100% websocket
@@ -17,6 +18,8 @@ var fs            = require('fs');
 var app           = express();
 var port          = process.env.PORT || 8081;
 var configDB      = require(__dirname + '/app/config/database.js');
+var csrfError     = require(__dirname + '/app/middleware/csrf-error.js');
+var csrfToken     = require(__dirname + '/app/middleware/csrf-token.js');
 
 // Before we can use Globalize, we need to feed it on the appropriate I18n content (Unicode CLDR). Read Requirements on Getting Started on the root's README.md for more information.
 //Globalize.load(require( __dirname + '/cldr/main/en-CA/ca-gregorian.json'));
@@ -94,6 +97,11 @@ app.use(connectAssets({
     servePath: 'static/bundled',
     buildDir: 'static/bundled',
 }));
+
+
+app.use(csrf());
+app.use(csrfError);
+app.use(csrfToken);
 
 app.use(localeMidgard);
 

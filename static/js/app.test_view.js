@@ -4,17 +4,18 @@ App.test_view = (function (parent, window, document, $)
     {
         var button = document.getElementById('load-partials');
 
-        button.onclick = function(e)
-        {
-            e.preventDefault();
-            loadPartialView();
-        }
+        button.onclick = loadPartialView;
 
         $('.ui.dropdown').dropdown();
     }
 
-    function loadPartialView()
+    function loadPartialView(e)
     {
+        e.preventDefault();
+
+        var self = this;
+        Common.addClass(self, 'loading'); // jsperf this vs jquery add class on click and select logic too
+
         var xhr = new XMLHttpRequest();
 
         xhr.addEventListener("error", function (e) {
@@ -40,6 +41,8 @@ App.test_view = (function (parent, window, document, $)
                     var div = document.getElementById('partial-content');
 
                     $(div).html(results);
+
+                    Common.removeClass(self, 'loading');
                     // div.innerHTML = results;
                     // eval(div);
                 }
