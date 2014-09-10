@@ -26,15 +26,13 @@ block content
 					i.icon.asterisk
 		div.fluid.ui.blue.submit.button #{title}
 		div.ui.clearing.divider
-		div.ui.two.fields
-			div.field
-				a.ui.basic.button(href='/password-recovery') Forgot Password
-					//i.icon.refresh
-					//span Forgot Password
-			div.field
-				a.ui.basic.button(href='/language') Select Language
-					//i.icon.globe
-					//span Language
+		table.ui.table
+			tbody
+				tr
+					td
+						a.ui.basic.button(href='/password-recovery') #{forgot}
+					td
+						a.ui.basic.button(href='/language') #{language}
 
 block additional-js
 	!= js('app.login_view')

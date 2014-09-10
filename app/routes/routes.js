@@ -45,6 +45,8 @@ module.exports = function(app, passport) {
                 title: req.locale.translate('login/title'), 
                 email: req.locale.translate('login/email'), 
                 password: req.locale.translate('login/password'), 
+                forgot: req.locale.translate('login/forgot'), 
+                language: req.locale.translate('login/language'), 
                 message: req.flash('loginMessage')
             }); 
     });

@@ -4,6 +4,7 @@ block content
 	h1= title
 
 	form#form-lang(action='/language', method='post')
+		input(type='hidden', name='_csrf', value=token)
 		label= selectLangMsg
 		select#select-lang(size=5)
 			each lang in languages
