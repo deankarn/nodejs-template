@@ -63,23 +63,40 @@ var App = window.App || (function(window, document, $)
 
     function focusOnFirstErrorField()
     {
-    	var errElem = document.querySelector('.has-error');
+    	var errElem = document.querySelector('.error');
 
     	if(!errElem)
     	{
     		return false;
     	}
 
-        var element = errElem.querySelector('input:visible, textarea:visible, select:visible');
+        var elements = errElem.querySelectorAll('input, textarea, select');
 
-        if(!element)
+        if(elements.length === 0)
         {
             return false;
         }
 
-        element.select();
+        for(i=0, len=elements.length; i < len; i++)
+        {
+            // if hidden offest width and height are zero
+            // only relyable way to determine is visible or not ( this is the way jQuery does it. )
+            if(!(elements[i].offsetWidth === 0 && elements[i].offsetHeight === 0))
+            {
+                if(typeof(elements[i].select) === 'undefined')
+                {
+                    elements[i].focus();
+                }
+                else
+                {
+                    elements[i].select();
+                }
 
-        return true;
+                return true;
+            }
+        }
+
+        return false;
     }
 
     function setDebug(val){

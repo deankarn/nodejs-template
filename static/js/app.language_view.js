@@ -10,6 +10,23 @@ App.languageView = (function (parent, window, document, $)
 {
     function initialize()
     {
+        var rules = {
+            'select-lang': {
+              identifier  : 'select-lang',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please select a Language'
+                }
+              ]
+            }
+        };
+
+        $('.ui.form').form(rules, {
+            inline : true,
+            on     : 'submit'
+          });
+
         document.getElementById('submit-lang').onclick = submitOverride;
         select.onchange = languageChanged;
 
@@ -26,7 +43,7 @@ App.languageView = (function (parent, window, document, $)
     {
         e.preventDefault();
 
-        var form = document.getElementById('form-lang'),
+        var form = document.getElementById('lang-form'),
             lang = select.options[select.selectedIndex].value;
 
         form.action = form.action + '?locale=' + lang;
