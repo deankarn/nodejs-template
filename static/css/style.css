@@ -1,3 +1,14 @@
+html,
+body
+{
+	height:100%;
+}
+
+body
+{
+	margin:0;
+}
+
 .table
 {
 	display:table;
@@ -13,3 +24,4 @@
 {
 	margin:0 auto;
 }
+

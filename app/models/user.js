@@ -28,7 +28,9 @@ var userSchema = mongoose.Schema({
         email        : String,
         name         : String
     },
-    locale : String
+    locale     : String,
+    updated_at : { type: Date, default: Date.now },
+    created_at : { type: Date, default: Date.now }
 });
 
 // methods ======================

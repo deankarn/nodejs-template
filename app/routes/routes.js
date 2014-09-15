@@ -2,7 +2,11 @@
 module.exports = function(app, passport) {
 
 	app.get('/', isLoggedIn, function(req, res) {
-            res.render('main/index.jade', { title: 'Home' });
+            res.render('main/index.jade', { 
+                title: req.locale.translate('index/title'),
+                homeMsg: req.locale.translate('index/homeMsg'),
+                logoutMsg: req.locale.translate('index/logoutMsg')
+            });
     });
 
     app.get('/language', function(req, res) {
@@ -63,7 +67,8 @@ module.exports = function(app, passport) {
         req.session.localeString = req.user.locale;
         req.session.utcOffset = req.body['utc-offset'];
 
-        res.redirect('/profile');
+        //res.redirect('/profile');
+        res.redirect('/');
     });
 
     app.get('/signup', function(req, res) {
